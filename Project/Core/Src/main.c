@@ -24,6 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "oled.h"
 #include "hx711.h"
 /* USER CODE END Includes */
 
@@ -70,6 +71,10 @@ extern uint32_t weightRealValue;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	uint8_t x = 0;
+	uint8_t y = 0;
+	uint8_t numberBuffer[9] = {0};
+	double priceValue = 0;
 	double weightLimitValue = 10e3;
   /* USER CODE END 1 */
 
@@ -94,7 +99,23 @@ int main(void)
   MX_I2C1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-	weightFirstValue = HX711_ReadCount();
+	//weightFirstValue = HX711_ReadCount();
+	OLED_Init();
+	OLED_Clear();
+	OLED_ShowChinese(x + 24 + 16 * 0, y + 2 * 0, 0);
+	OLED_ShowChinese(x + 24 + 16 * 1, y + 2 * 0, 1);
+	OLED_ShowChinese(x + 24 + 16 * 2, y + 2 * 0, 2);
+	OLED_ShowChinese(x + 24 + 16 * 3, y + 2 * 0, 3);
+	OLED_ShowChinese(x + 24 + 16 * 4, y + 2 * 0, 4);
+	OLED_ShowChinese(x + 16 * 0, y + 2 * 1, 5);
+	OLED_ShowChinese(x + 16 * 1, y + 2 * 1, 6);
+	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 1, ':', 16);
+	OLED_ShowChinese(x + 16 * 0, y + 2 * 2, 7);
+	OLED_ShowChinese(x + 16 * 1, y + 2 * 2, 8);
+	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 2, ':', 16);
+	OLED_ShowChinese(x + 16 * 0, y + 2 * 3, 9);
+	OLED_ShowChinese(x + 16 * 1, y + 2 * 3, 10);
+	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 3, ':', 16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
