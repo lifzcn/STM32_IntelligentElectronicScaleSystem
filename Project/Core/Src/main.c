@@ -70,7 +70,7 @@ extern uint32_t weightRealValue;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	double weightLimitValue = 10e3;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -102,7 +102,15 @@ int main(void)
   while (1)
   {
 		weightRealValue = HX711_GetRealWeight();
-		printf("%d", weightRealValue);
+		
+		printf("%d\n", weightRealValue);
+		
+		if(weightRealValue > weightLimitValue)
+		{
+			HAL_GPIO_WritePin(Buzzer_IO_GPIO_Port, Buzzer_IO_Pin, GPIO_PIN_SET);
+		}
+		
+		HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

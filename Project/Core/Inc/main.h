@@ -61,6 +61,12 @@ void Error_Handler(void);
 #define HX711_DT_GPIO_Port GPIOB
 #define HX711_SCK_Pin GPIO_PIN_11
 #define HX711_SCK_GPIO_Port GPIOB
+#define Buzzer_IO_Pin GPIO_PIN_3
+#define Buzzer_IO_GPIO_Port GPIOB
+#define Buzzer_VCC_Pin GPIO_PIN_4
+#define Buzzer_VCC_GPIO_Port GPIOB
+#define Buzzer_GND_Pin GPIO_PIN_5
+#define Buzzer_GND_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
