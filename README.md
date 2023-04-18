@@ -1,0 +1,2 @@
+# STM32_IntelligentElectronicScaleSystem
+ 基于STM32F103C8T6和HX711开发的智能电子秤系统
