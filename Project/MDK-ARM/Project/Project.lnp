@@ -2,6 +2,7 @@
 "project\startup_stm32f103xb.o"
 "project\hx711.o"
 "project\oled.o"
+"project\keypad.o"
 "project\main.o"
 "project\gpio.o"
 "project\i2c.o"

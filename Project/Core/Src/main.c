@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "oled.h"
 #include "hx711.h"
+#include "keypad.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -73,9 +74,11 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	uint8_t x = 0;
 	uint8_t y = 0;
-	uint8_t numberBuffer[9] = {0};
-	double priceValue = 0;
+	uint8_t barcodeNumberBuffer[15];
 	double weightLimitValue = 10e3;
+	uint8_t keyValue;
+	uint8_t i = 0;
+	uint8_t j = 1;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -116,9 +119,7 @@ int main(void)
 	OLED_ShowChinese(x + 16 * 0, y + 2 * 3, 9);
 	OLED_ShowChinese(x + 16 * 1, y + 2 * 3, 10);
 	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 3, ':', 16);
-	
-  firstWeightValue = HX711_ReadCount();
-  HAL_Delay(1000);
+	firstWeightValue = HX711_ReadCount();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -135,6 +136,83 @@ int main(void)
 		else
 		{
 			HAL_GPIO_WritePin(Buzzer_IO_GPIO_Port, Buzzer_IO_Pin, GPIO_PIN_RESET);
+		}
+		
+		if(i == 0)
+		{
+			keyValue = readKeypad();
+			barcodeNumberBuffer[0] = keyValue;
+			printf("%c\n", barcodeNumberBuffer[0]);
+			i = 1;
+		}
+		else
+		{
+			if(barcodeNumberBuffer[0] == '*')
+			{
+				keyValue = readKeypad();
+				switch(keyValue)
+				{
+					case '0':
+						barcodeNumberBuffer[j] = '0';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '1':
+						barcodeNumberBuffer[j] = '1';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '2':
+						barcodeNumberBuffer[j] = '2';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '3':
+						barcodeNumberBuffer[j] = '3';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '4':
+						barcodeNumberBuffer[j] = '4';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '5':
+						barcodeNumberBuffer[j] = '5';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '6':
+						barcodeNumberBuffer[j] = '6';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '7':
+						barcodeNumberBuffer[j] = '7';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '8':
+						barcodeNumberBuffer[j] = '8';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '9':
+						barcodeNumberBuffer[j] = '9';
+						printf("%c\n", barcodeNumberBuffer[j]);
+						j++;
+					break;
+					case '#':
+						barcodeNumberBuffer[14] = '#';
+						printf("%c\n", barcodeNumberBuffer[j]);
+					break;
+				}
+			j = 1;
+			}
+		}
+		if(barcodeNumberBuffer[14] == '#')
+		{
+			printf("%s\n", barcodeNumberBuffer);
 		}
 		
 		HAL_Delay(1000);

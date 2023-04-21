@@ -405,6 +405,11 @@
               <FilePath>..\Core\Src\oled.c</FilePath>
             </File>
             <File>
+              <FileName>keypad.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\keypad.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
