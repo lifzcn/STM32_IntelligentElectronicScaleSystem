@@ -57,11 +57,11 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-extern uint8_t ReceiveBuff[BUFFERSIZE]; 
+extern uint8_t ReceiveBuff[BUFFERSIZE];
 extern uint8_t rxEndFlag;
 extern uint8_t rxLength;
-extern uint32_t weightFirstValue;
-extern uint32_t weightRealValue;
+extern uint32_t firstWeightValue;
+extern uint32_t realWeightValue;
 /* USER CODE END 0 */
 
 /**
@@ -116,19 +116,25 @@ int main(void)
 	OLED_ShowChinese(x + 16 * 0, y + 2 * 3, 9);
 	OLED_ShowChinese(x + 16 * 1, y + 2 * 3, 10);
 	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 3, ':', 16);
+	
+  firstWeightValue = HX711_ReadCount();
+  HAL_Delay(1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		weightRealValue = HX711_GetRealWeight();
+		realWeightValue = HX711_GetRealWeight();
+		printf("%d\n", realWeightValue);
 		
-		printf("%d\n", weightRealValue);
-		
-		if(weightRealValue > weightLimitValue)
+		if(realWeightValue > weightLimitValue)
 		{
 			HAL_GPIO_WritePin(Buzzer_IO_GPIO_Port, Buzzer_IO_Pin, GPIO_PIN_SET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(Buzzer_IO_GPIO_Port, Buzzer_IO_Pin, GPIO_PIN_RESET);
 		}
 		
 		HAL_Delay(1000);

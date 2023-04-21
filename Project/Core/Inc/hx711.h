@@ -6,7 +6,8 @@
 
 #define BUFFERSIZE 255
 
-uint32_t HX711_ReadCount(void);
-uint32_t HX711_GetRealWeight(void);
+uint32_t HX711_ReadCount();
+uint32_t HX711_ReadWeight();
+uint32_t HX711_GetRealWeight();
 
 #endif
