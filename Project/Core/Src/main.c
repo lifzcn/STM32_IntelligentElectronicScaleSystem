@@ -110,15 +110,9 @@ int main(void)
 	OLED_ShowChinese(x + 24 + 16 * 2, y + 2 * 0, 2);
 	OLED_ShowChinese(x + 24 + 16 * 3, y + 2 * 0, 3);
 	OLED_ShowChinese(x + 24 + 16 * 4, y + 2 * 0, 4);
-	OLED_ShowChinese(x + 16 * 0, y + 2 * 1, 5);
-	OLED_ShowChinese(x + 16 * 1, y + 2 * 1, 6);
-	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 1, ':', 16);
-	OLED_ShowChinese(x + 16 * 0, y + 2 * 2, 7);
-	OLED_ShowChinese(x + 16 * 1, y + 2 * 2, 8);
+	OLED_ShowChinese(x + 16 * 0, y + 2 * 2, 5);
+	OLED_ShowChinese(x + 16 * 1, y + 2 * 2, 6);
 	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 2, ':', 16);
-	OLED_ShowChinese(x + 16 * 0, y + 2 * 3, 9);
-	OLED_ShowChinese(x + 16 * 1, y + 2 * 3, 10);
-	OLED_ShowChar(x + 16 * 2 + 8 * 0, y + 2 * 3, ':', 16);
 	firstWeightValue = HX711_ReadCount();
   /* USER CODE END 2 */
 
@@ -128,6 +122,10 @@ int main(void)
   {
 		realWeightValue = HX711_GetRealWeight();
 		printf("%d\n", realWeightValue);
+
+		OLED_ShowNum(x + 16 * 2 + 8 * 1, y + 2 * 2, realWeightValue, 5, 16);
+		OLED_ShowChar(x + 16 * 2 + 8 * 6, y + 2 * 2, ' ', 16);
+		OLED_ShowChar(x + 16 * 2 + 8 * 7, y + 2 * 2, 'g', 16);
 		
 		if(realWeightValue > weightLimitValue)
 		{
@@ -137,7 +135,7 @@ int main(void)
 		{
 			HAL_GPIO_WritePin(Buzzer_IO_GPIO_Port, Buzzer_IO_Pin, GPIO_PIN_RESET);
 		}
-		
+		/*
 		if(i == 0)
 		{
 			keyValue = readKeypad();
@@ -214,7 +212,7 @@ int main(void)
 		{
 			printf("%s\n", barcodeNumberBuffer);
 		}
-		
+		*/
 		HAL_Delay(1000);
     /* USER CODE END WHILE */
 
